@@ -14,19 +14,17 @@ public class Warzombie : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] float damageRate = 25f;
-    [SerializeField] ZombieAttack zombieAttack;
 
     bool isEnemyAlive;
-    CapsuleCollider capsule;
+    [SerializeField] CapsuleCollider capsule;
 
     // Start is called before the first frame update
     void Start()
     {
-        capsule = GetComponent<CapsuleCollider>();
         DesableRagdoll();
 
-        //mainCamera = FindObjectOfType<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+
         if(gameObject.activeInHierarchy)
         {
             isEnemyAlive = true;
@@ -63,9 +61,7 @@ public class Warzombie : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
+  
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
@@ -85,14 +81,5 @@ public class Warzombie : MonoBehaviour
         navMeshAgent.enabled = false;
         isEnemyAlive = false;
         capsule.enabled = false;
-    }
-
-    public void Attack()
-    {
-        if (playerHealth != null && zombieAttack.isEnemyTouch)
-        {
-            playerHealth.TakeDamage(damageRate);
-
-        }
     }
 }

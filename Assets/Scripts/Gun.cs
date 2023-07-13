@@ -11,12 +11,13 @@ public class Gun : MonoBehaviour
     public bool multipleFire;
     [SerializeField] Camera fpsCamera;
     public Text buttonFireRateText;
-    public ParticleSystem muzzleEffect;
+    public GameObject muzzleEffect;
     public GameObject impact;
     public int ammoMax = 30;
     public Animation animator;
     float impuctForce = 50f;
-    
+
+
     private void Start() {
         FireTempState();
     }
@@ -58,19 +59,23 @@ public class Gun : MonoBehaviour
             range))
 
             {
-                SetDamage(raycastHit);
-            }
+          
+            SetDamage(raycastHit);
+           
+        }
     }
 
     private void SetDamage(RaycastHit raycastHit)
     {        
         Target targetScript = raycastHit.transform.GetComponent<Target>();
+        
+        Debug.Log(raycastHit.transform.name);
 
-        if(targetScript != null)
+        if (targetScript != null)
         {
-            Debug.Log(raycastHit.transform.name);
             targetScript.GetDamage(damage);
         }
+        
 
         if(raycastHit.rigidbody != null)
         {
@@ -96,12 +101,5 @@ public class Gun : MonoBehaviour
     {
     
         
-        /*{
-            muzzleEffect.Play();
-        }
-        else 
-        {
-            muzzleEffect.Stop();
-        }*/
     }
 }

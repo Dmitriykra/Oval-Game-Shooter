@@ -15,13 +15,9 @@ public class Target : MonoBehaviour
 
         if (health <= 0)
         {
-            if(warzombie != null)
-            {   
-                
-                warzombie.EnableRagdoll();
-                Invoke("DesableEnemy", 5f);
-            }
-            
+            warzombie.EnableRagdoll();
+            Invoke("DesableEnemy", 5f);
+
         }
     }
     void DesableEnemy()

@@ -6,9 +6,10 @@ public class ZombieAttack : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] float damageRate = 25f;
-    [SerializeField] float playerH = 100f;
     public bool isEnemyTouch;
+    [SerializeField] PlayerHealth playerHealth;
 
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -30,7 +31,19 @@ public class ZombieAttack : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        animator.SetBool("isAttack", false);
-        isEnemyTouch = false;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool("isAttack", false);
+            isEnemyTouch = false;
+        }
+    }
+
+    public void AttackPlayer()
+    {
+        if (isEnemyTouch)
+        {
+            playerHealth.TakeDamage(damageRate);
+
+        }
     }
 }
